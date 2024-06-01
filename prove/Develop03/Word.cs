@@ -2,7 +2,7 @@
 
 public class Word
 {
- public String word;
+ private String word;
  private bool isHidden;
  public Word(String word, bool isHidden)
  {
