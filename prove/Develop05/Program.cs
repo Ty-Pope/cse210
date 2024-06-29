@@ -2,8 +2,13 @@ using System;
 
 class Program
 {
-    static void Main(string[] args)
-    {
-        Console.WriteLine("Hello Develop05 World!");
-    }
+ static void Main(string[] args)
+ {
+  GoalMenu goalMenu = new GoalMenu();
+  bool isFinished = true;
+  while (isFinished)
+  {
+   isFinished = goalMenu.Menu();
+  }
+ }
 }
