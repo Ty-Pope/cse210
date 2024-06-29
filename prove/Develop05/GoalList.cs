@@ -50,21 +50,21 @@ public class GoalList
  {
   foreach (SimpleGoal s in simpleList)
   {
-   if (s.Id == id)
+   if (s.GetId() == id)
    {
     return s;
    }
   }
   foreach (EternalGoal e in eternalList)
   {
-   if (e.Id == id)
+   if (e.GetId() == id)
    {
     return e;
    }
   }
   foreach (ChecklistGoal c in checklistList)
   {
-   if (c.Id == id)
+   if (c.GetId() == id)
    {
     return c;
    }
@@ -74,32 +74,32 @@ public class GoalList
  public void PrintGoal(Goal goal)
  {
   string goalString;
-  if (goal.IsComplete == true)
+  if (goal.GetIsComplete() == true)
   {
-   goalString = $"ID: {goal.Id} -- [X] --";
+   goalString = $"ID: {goal.GetId()} -- [X] --";
   }
   else
   {
    if (goal is ChecklistGoal cg)
    {
-    if (cg.StepsCompleted < cg.Steps)
+    if (cg.GetStepsCompleted() < cg.GetSteps())
     {
-     goalString = $"ID: {goal.Id} -- [{cg.StepsCompleted}/{cg.Steps}] --";
+     goalString = $"ID: {goal.GetId()} -- [{cg.GetStepsCompleted()}/{cg.GetSteps()}] --";
     }
     else
     {
-     goalString = $"ID: {goal.Id} -- [X] --";
+     goalString = $"ID: {goal.GetId()} -- [X] --";
     }
    }
    else
    {
-    goalString = $"ID: {goal.Id} -- [ ] --";
+    goalString = $"ID: {goal.GetId()} -- [ ] --";
    }
   }
-  goalString += $" {goal.Name} -- {goal.Points}";
+  goalString += $" {goal.GetName()} -- {goal.GetPoints()} points";
   if (goal is ChecklistGoal check)
   {
-   goalString += $" -- step points: {check.StepPoints}";
+   goalString += $" -- step points: {check.GetStepPoints()}";
   }
   Console.WriteLine(goalString);
  }

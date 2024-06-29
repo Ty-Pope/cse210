@@ -61,7 +61,7 @@ public class GoalMenu
   Goal goal = goals.FindGoal(id);
   if (goal != null)
   {
-   if (goal.IsComplete)
+   if (goal.GetIsComplete())
    {
     Console.WriteLine("This goal has already been completed. Pick another goal to complete.");
    }
@@ -152,17 +152,17 @@ public class GoalMenu
  }
  private int GetPoints(Goal g)
  {
-  if (g.IsComplete && g is ChecklistGoal cg)
+  if (g.GetIsComplete() && g is ChecklistGoal cg)
   {
-   return cg.StepPoints * (cg.Steps - 1) + cg.Points;
+   return cg.GetStepPoints() * (cg.GetSteps() - 1) + cg.GetPoints();
   }
   else if (g is EternalGoal eg)
   {
-   return eg.Points * eg.TimesCompleted;
+   return eg.GetPoints() * eg.GetTimesCompleted();
   }
-  else if (g.IsComplete)
+  else if (g.GetIsComplete())
   {
-   return g.Points;
+   return g.GetPoints();
   }
   return 0;
  }
