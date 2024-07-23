@@ -21,42 +21,25 @@ public class Battle
    t.Write(" vs. ");
    _enemy.PrintNameAndHealth();
    Console.WriteLine("");
-
+   List<string> test = _player.GetAttackNames();
    List<string> playerAttacks = _player.GetAttackNames();
+   bool addedPotion = false;
    if (_player.GetInventory().GetItemByName("Health Potion") != null)
    {
     playerAttacks.Add("Use Health Potion");
+    addedPotion = true;
    }
    playerAttacks.Add("Player Info");
    Choice choice = new Choice(playerAttacks);
    int battleChoice = choice.MakeChoice();
-   if (battleChoice == playerAttacks.Count)
+   if (battleChoice >= playerAttacks.Count - 1 && addedPotion == true)
    {
-    _player.PrintCharacter();
-    continue;
+    Test(addedPotion, battleChoice, playerAttacks, t);
    }
-   else if (battleChoice == playerAttacks.Count - 1)
+   else if (battleChoice == playerAttacks.Count && addedPotion == false)
    {
-    if (_player.GetMaxHealth() <= _player.GetHealth())
-    {
-     t.WriteLine("You are already at full health!");
-     continue;
-    }
-    Item healthPotion = _player.GetInventory().GetItemByName("Health Potion");
-    if (healthPotion != null && healthPotion is HealthPotion)
-    {
-     HealthPotion potion = (HealthPotion)healthPotion;
-     _player.SetHealth(_player.GetHealth() + potion.GetHealth());
-     _player.GetInventory().RemoveItem(healthPotion);
-     t.WriteLine("You used a health potion and gained " + potion.GetHealth() + " health!");
-     //This continue is here to just be nice
-     continue;
-    }
-    else
-    {
-     t.WriteLine("You don't have any health potions!");
-    }
-    continue;
+    //This is here for in case the player has no potions
+    Test(addedPotion, battleChoice, playerAttacks, t);
    }
    else
    {
@@ -77,7 +60,7 @@ public class Battle
     _enemy.Damage(playerDamage);
     if (_enemy.IsDead())
     {
-     Console.WriteLine("You win!");
+     t.WriteLine("You win!");
      return true;
     }
     int attackIndexEnemy = new Random().Next(0, _enemy.GetAttacks().Count);
@@ -110,5 +93,32 @@ public class Battle
   int bonus = attacker.GetSelectedWeapon().GetDamage();
   int defence = defense.GetDefense();
   return damage + bonus - defence;
+ }
+ private void Test(bool addedPotion, int battleChoice, List<string> playerAttacks, Text t)
+ {
+  if (addedPotion == true && battleChoice == playerAttacks.Count - 1)
+  {
+   if (_player.GetMaxHealth() <= _player.GetHealth())
+   {
+    t.WriteLine("You are already at full health!");
+    return;
+   }
+   Item healthPotion = _player.GetInventory().GetItemByName("Health Potion");
+   if (healthPotion != null && healthPotion is HealthPotion)
+   {
+    HealthPotion potion = (HealthPotion)healthPotion;
+    _player.SetHealth(_player.GetHealth() + potion.GetHealth());
+    _player.GetInventory().RemoveItem(healthPotion);
+    t.WriteLine("You used a health potion and gained " + potion.GetHealth() + " health!");
+   }
+   else
+   {
+    t.WriteLine("You don't have any health potions!");
+   }
+  }
+  else
+  {
+   _player.PrintCharacter();
+  }
  }
 }
