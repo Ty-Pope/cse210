@@ -1,26 +1,20 @@
 public abstract class Item
 {
- private string name;
- private string value;
- private string description;
+ private string _name;
+ private string _description;
 
- public Item(string name, string value, string description)
+ public Item(string name, string description)
  {
-  this.name = name;
-  this.value = value;
-  this.description = description;
+  _name = name;
+  _description = description;
  }
  public string GetName()
  {
-  return name;
- }
- public string GetValue()
- {
-  return value;
+  return _name;
  }
  public string GetDescription()
  {
-  return description;
+  return _description;
  }
 
  public abstract void PrintItem();

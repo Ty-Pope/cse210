@@ -1,20 +1,19 @@
 public class HealthPotion : Item
 {
- private int health;
- public HealthPotion(string name, string value, string description, int health)
-     : base(name, value, description)
+ private int _health;
+ public HealthPotion(string _name, string _description, int health)
+     : base(_name, _description)
  {
-  this.health = health;
+  _health = health;
  }
  public int GetHealth()
  {
-  return health;
+  return _health;
  }
  public override void PrintItem()
  {
   Console.WriteLine("Name: " + GetName());
-  Console.WriteLine("Value: " + GetValue());
   Console.WriteLine("Description: " + GetDescription());
-  Console.WriteLine("Healing Amount: " + health);
+  Console.WriteLine("Healing Amount: " + _health);
  }
 }

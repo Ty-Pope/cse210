@@ -16,7 +16,7 @@ public class Room
  }
  public void PrintItems()
  {
-  items.ShowItems();
+  items.PrintInventory();
  }
  public void PickUpItem(Character character, Item item)
  {

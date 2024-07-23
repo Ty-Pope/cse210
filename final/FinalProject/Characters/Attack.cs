@@ -1,40 +1,34 @@
 public class Attack
 {
- private string name;
- private int damage;
- private int manaCost;
- private int splashDamage;
- private int level;
- public Attack(string name, int damage, int manaCost, int splashDamage, int level)
+ private string _name;
+ private int _damage;
+ private int _manaCost;
+ private int _splashDamage;
+ public Attack(string name, int damage, int manaCost, int splashDamage)
  {
-  this.name = name;
-  this.damage = damage;
-  this.manaCost = manaCost;
-  this.splashDamage = splashDamage;
-  this.level = level;
+  _name = name;
+  _damage = damage;
+  _manaCost = manaCost;
+  _splashDamage = splashDamage;
  }
  public string GetName()
  {
-  return name;
+  return _name;
  }
  public int GetDamage()
  {
-  return damage;
+  return _damage;
  }
  public int GetManaCost()
  {
-  return manaCost;
+  return _manaCost;
  }
  public int GetSplashDamage()
  {
-  return splashDamage;
+  return _splashDamage;
  }
  public bool CanAttack(int currentMana)
  {
-  return currentMana >= manaCost;
- }
- public bool IsUnderleveled(int level)
- {
-  return this.level < level;
+  return currentMana >= _manaCost;
  }
 }

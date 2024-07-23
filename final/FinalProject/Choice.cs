@@ -1,43 +1,43 @@
 public class Choice
 {
- private List<string> options;
- Text text;
+ private List<string> _options;
+ Text _text;
  public Choice(List<string> options)
  {
-  this.options = options;
-  this.text = new Text();
+  _options = options;
+  _text = new Text();
  }
  public void PrintOptions()
  {
   int choiceNum = 0;
-  foreach (string option in options)
+  foreach (string option in _options)
   {
    choiceNum++;
-   text.WriteLine($"{choiceNum}. {option}");
+   _text.WriteLine($"{choiceNum}. {option}");
   }
  }
  public int MakeChoice()
  {
   PrintOptions();
   int choice = 0;
-  while (choice < 1 || choice > options.Count())
+  while (choice < 1 || choice > _options.Count())
   {
    try
    {
-    text.WriteLine("Choose an option:");
+    _text.WriteLine("Choose an option:");
     choice = Convert.ToInt32(Console.ReadLine());
    }
    catch
    {
     Console.Write("Enter a number and make sure to ");
    }
-   if (choice > 0 && choice <= options.Count())
+   if (choice > 0 && choice <= _options.Count())
    {
     break;
    }
    else
    {
-    text.WriteLine("Pick a number between 1 and " + options.Count());
+    _text.WriteLine("Pick a number between 1 and " + _options.Count());
    }
   }
   return choice;
